@@ -16,7 +16,7 @@ window.onload = function(){
 
     let images = [];
     let currentCard = {
-        art: null,
+        art: '',
         artX: 0,
         artY: 0,
         supportShout: null,
