@@ -104,9 +104,14 @@ window.onload = function(){
     };
 
     btnSaveImage.onclick = function(e){
+            let downloadName = "image.png";
+
+            if(currentCard.title){
+                downloadName = currentCard.title.replace(/[^a-zA-Z0-9]/g, '-');
+            }
 
             let a = document.createElement('A');
-            a.download = "image.png";
+            a.download = downloadName;
             a.href = canvas.toDataURL('image/png');
             document.body.appendChild(a);
             a.click();
