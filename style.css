@@ -82,6 +82,11 @@ td {
     padding: 10px 0;
 }
 
+.field_info{
+    font-size: 0.75em;
+    display: block;
+}
+
 @media screen and (min-width: 900px){
     .main{
         display: flex;
