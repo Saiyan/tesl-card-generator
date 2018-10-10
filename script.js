@@ -104,18 +104,20 @@ window.onload = function(){
     };
 
     btnSaveImage.onclick = function(e){
+        canvas.toBlob(function(blob) {
             let downloadName = "image.png";
-
             if(currentCard.title){
                 downloadName = currentCard.title.replace(/[^a-zA-Z0-9]/g, '-') + '.png';
             }
 
             let a = document.createElement('A');
             a.download = downloadName;
-            a.href = canvas.toDataURL('image/png');
+            a.href = window.URL.createObjectURL(blob);
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+
+        }, "image/png");
     };
 
     function drawCardImage() {
