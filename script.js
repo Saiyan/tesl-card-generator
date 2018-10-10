@@ -103,7 +103,9 @@ window.onload = function(){
         }
     };
 
-    btnSaveImage.onclick = function(){
+    btnSaveImage.onclick = function(e){
+        e.stopPropagation();
+        e.preventDefault();
 
         canvas.toBlob(function(blob) {
             let a = document.createElement('A');
