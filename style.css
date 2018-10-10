@@ -1,4 +1,4 @@
-
+btn-save_image
 * {
     padding: 0;
     margin: 0;
@@ -80,6 +80,7 @@ td {
     font-size: 18px;
     cursor: pointer;
     padding: 10px 0;
+    text-align: center;
 }
 
 .field_info{

@@ -104,18 +104,13 @@ window.onload = function(){
     };
 
     btnSaveImage.onclick = function(e){
-        e.stopPropagation();
-        e.preventDefault();
 
-        canvas.toBlob(function(blob) {
             let a = document.createElement('A');
-            a.target = '_blank';
             a.download = "image.png";
-            a.href = URL.createObjectURL(blob);
+            a.href = canvas.toDataURL('image/png');
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-        }, "image/png");
     };
 
     function drawCardImage() {
