@@ -135,7 +135,7 @@ window.onload = function(){
         if(layerFrame) ctx.drawImage(layerFrame, 0, 0);
         if(layerRarity) ctx.drawImage(layerRarity, 0, 0);
         if(layerSupport) ctx.drawImage(layerSupport, 0, 0);
-        if(layerPH) ctx.drawImage(layerPH, 0, 0);
+        else if(layerPH) ctx.drawImage(layerPH, 0, 0);
 
         //Magicka
         ctx.textAlign="center";
@@ -145,12 +145,20 @@ window.onload = function(){
         ctx.strokeText(currentCard.magicka, 65, 110);
         ctx.fillText(currentCard.magicka, 65, 110);
 
-        //Power & Health
-        ctx.textAlign="center";
-        ctx.font = 'bold 52px Ubuntu';
-        ctx.fillStyle = '#FDF6DF';
-        ctx.fillText(currentCard.power, 65, 415);
-        ctx.fillText(currentCard.health, 375, 415);
+        if(currentCard.supportShout) {
+            //Support
+            ctx.textAlign = "center";
+            ctx.font = '700 16px Merriweather';
+            ctx.fillStyle = '#111';
+            ctx.fillText(currentCard.supportShout, 220, 488);
+        }else {
+            //Power & Health
+            ctx.textAlign = "center";
+            ctx.font = 'bold 52px Ubuntu';
+            ctx.fillStyle = '#FDF6DF';
+            ctx.fillText(currentCard.power, 65, 415);
+            ctx.fillText(currentCard.health, 375, 415);
+        }
 
         //Type
         ctx.textAlign="center";
@@ -165,12 +173,6 @@ window.onload = function(){
         ctx.font = 'bold '+titleFontSize+'px Merriweather';
         ctx.fillStyle = '#FDF6DF';
         ctx.fillText(currentCard.title, 230, 105);
-
-        //Support
-        ctx.textAlign = "center";
-        ctx.font = '700 16px Merriweather';
-        ctx.fillStyle = '#111';
-        ctx.fillText(currentCard.supportShout, 220, 488);
 
         //Text
         drawCardText(ctx);
