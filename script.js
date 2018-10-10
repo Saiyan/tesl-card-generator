@@ -112,6 +112,7 @@ window.onload = function(){
             a.click();
         }, "image/png");
     };
+    btnSaveImage.touchend = btnSaveImage.onclick;
 
     function drawCardImage() {
         let ctx = canvas.getContext("2d");
