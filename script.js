@@ -107,7 +107,7 @@ window.onload = function(){
             let downloadName = "image.png";
 
             if(currentCard.title){
-                downloadName = currentCard.title.replace(/[^a-zA-Z0-9]/g, '-');
+                downloadName = currentCard.title.replace(/[^a-zA-Z0-9]/g, '-') + '.png';
             }
 
             let a = document.createElement('A');
