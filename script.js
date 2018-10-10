@@ -107,11 +107,15 @@ window.onload = function(){
         e.stopPropagation();
         e.preventDefault();
 
-        let a = document.createElement('A');
-        a.download = "image.png";
-        a.href = canvas.toDataURL();
-        a.click();
-
+        canvas.toBlob(function(blob) {
+            let a = document.createElement('A');
+            a.target = '_blank';
+            a.download = "image.png";
+            a.href = URL.createObjectURL(blob);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, "image/png");
     };
 
     function drawCardImage() {
