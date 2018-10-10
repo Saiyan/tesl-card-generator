@@ -19,7 +19,7 @@ window.onload = function(){
         art: '',
         artX: 0,
         artY: 0,
-        supportShout: null,
+        supportShout: '',
         frame: 'mono_neutral',
         health: '4',
         magicka: '5',
