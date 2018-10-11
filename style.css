@@ -88,6 +88,17 @@ td {
     font-size: 0.75em;
     display: block;
 }
+
+.disclaimer{
+    padding: 20px;
+    text-align: center;
+}
+
+.disclaimer a{
+    text-decoration: underline;
+    word-break: break-all;
+}
+
 @media screen and (max-width: 440px){
     .main{
         width: 320px;
