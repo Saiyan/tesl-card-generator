@@ -318,10 +318,10 @@ window.onload = function(){
         let ctx = canvasCrop.getContext('2d');
         let ratio = 1;
 
-        if(img.width > img.height && img.width > width)
+        if(img.width < img.height && img.width > width)
             ratio = width / img.width;
 
-        if(img.height >= img.width && img.height > height)
+        if(img.height <= img.width && img.height > height)
             ratio = height / img.height;
 
         let sourceX = 0;
