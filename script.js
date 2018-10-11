@@ -41,11 +41,12 @@ window.onload = function(){
 
     selectCardClass.onchange = function(){
         currentCard.frame = this.value;
+        checkRarityForDuoTrio();
         drawCardImage();
     };
 
     selectCardRarity.onchange = function(){
-        currentCard.rarity = this.value;
+        checkRarityForDuoTrio();
         drawCardImage();
     };
 
@@ -119,6 +120,16 @@ window.onload = function(){
 
         }, "image/png");
     };
+
+    function checkRarityForDuoTrio() {
+        currentCard.rarity = selectCardRarity.value;
+        if(currentCard.rarity.indexOf('legendary') >= 0){
+            if(currentCard.frame.indexOf('duo_') >= 0)
+                currentCard.rarity += '_duo';
+            else if(currentCard.frame.indexOf('trio_') >= 0)
+                currentCard.rarity += '_trio';
+        }
+    }
 
     function drawCardImage() {
         let ctx = canvas.getContext("2d");
@@ -212,7 +223,6 @@ window.onload = function(){
             'frame_mono_strength.png',
             'frame_trio_red_blue_purple.png',
             'frame_trio_tribunal.png',
-            'rarity_legendary_unique.png',
             'frame_duo_archer.png',
             'frame_duo_monk.png',
             'frame_mono_agility.png',
@@ -239,6 +249,11 @@ window.onload = function(){
             'frame_trio_hlaalu.png',
             'frame_trio_telvanni.png',
             'rarity_legendary.png',
+            'rarity_legendary_duo.png',
+            'rarity_legendary_trio.png',
+            'rarity_legendary_unique.png',
+            'rarity_legendary_unique_duo.png',
+            'rarity_legendary_unique_trio.png',
             'power_health_bg.png'
         ];
         let loadedImagesCount = 0;
