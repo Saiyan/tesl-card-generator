@@ -151,7 +151,7 @@ window.onload = function(){
             ctx.font = '700 16px Merriweather';
             ctx.fillStyle = '#111';
             ctx.fillText(currentCard.supportShout, 220, 488);
-        }else {
+        }else if(currentCard.power && currentCard.health){
             //Power & Health
             ctx.textAlign = "center";
             ctx.font = 'bold 52px Ubuntu';
@@ -195,7 +195,8 @@ window.onload = function(){
                 src = currentCard.supportShout ? 'support_bg.png' : '';
                 break;
             case 'ph':
-                src = 'power_health_bg.png';
+                if(currentCard.power && currentCard.health)
+                    src = 'power_health_bg.png';
                 break;
         }
 
