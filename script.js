@@ -282,7 +282,7 @@ window.onload = function(){
         let yText = 525 - (lines.length * (fontSize / 2));
 
         let data = '<svg xmlns="http://www.w3.org/2000/svg" width="280" height="120">' +
-            '<text font-size="'+fontSize+'" font-family="Rubik" fill="#D3C6A9" text-anchor="middle">';
+            '<text font-size="'+fontSize+'" font-family="Rubik, Arial, sans-serif" fill="#D3C6A9" text-anchor="middle">';
 
         let boldRegex = /\[([^\]]+)\]/g;
         for(let i=0; i < lines.length; i++) {
