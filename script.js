@@ -331,24 +331,37 @@ window.onload = function(){
         canvasCrop.width = width;
         canvasCrop.height = height;
         let ctx = canvasCrop.getContext('2d');
-        let ratio = 1;
 
-        if(img.width < img.height && img.width > width)
-            ratio = width / img.width;
+        let offsetX = 0.5;
+        let offsetY = 0.5;
 
-        if(img.height <= img.width && img.height > height)
-            ratio = height / img.height;
+        let iw = img.width,
+            ih = img.height,
+            r = Math.min(width / iw, height / ih),
+            nw = iw * r,   // new prop. width
+            nh = ih * r,   // new prop. height
+            cx, cy, cw, ch, ar = 1;
 
-        let sourceX = 0;
-        let sourceY = 0;
-        let sourceWidth = img.width;
-        let sourceHeight = img.height;
-        let destWidth = img.width * ratio;
-        let destHeight = img.height * ratio;
-        let destX = width / 2 - destWidth / 2;
-        let destY = height / 2 - destHeight / 2;
+        // decide which gap to fill
+        if (nw < width) ar = width / nw;
+        if (Math.abs(ar - 1) < 1e-14 && nh < height) ar = height / nh;  // updated
+        nw *= ar;
+        nh *= ar;
 
-        ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+        // calc source rectangle
+        cw = iw / (nw / width);
+        ch = ih / (nh / height);
+
+        cx = (iw - cw) * offsetX;
+        cy = (ih - ch) * offsetY;
+
+        // make sure source rectangle is valid
+        if (cx < 0) cx = 0;
+        if (cy < 0) cy = 0;
+        if (cw > iw) cw = iw;
+        if (ch > ih) ch = ih;
+
+        ctx.drawImage(img, cx, cy, cw, ch,  0, 0, width, height);
 
         imgCropContainer.onload = function(){
             currentCard.art = this;
