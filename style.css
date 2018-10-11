@@ -10,6 +10,7 @@ btn-save_image
 
 body {
     font-family: 'Ubuntu', sans-serif;
+    margin: 0;
 }
 
 .clear {
@@ -86,6 +87,17 @@ td {
 .field_info{
     font-size: 0.75em;
     display: block;
+}
+@media screen and (max-width: 440px){
+    .main{
+        width: 320px;
+    }
+    .main-canvas canvas {
+        width: 100%;
+    }
+    .main-input{
+        width: 100%;
+    }
 }
 
 @media screen and (min-width: 900px){
