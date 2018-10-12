@@ -29,6 +29,9 @@ window.onload = function(){
         text: '[Summon]: Keep hope until \nall issues with the \nnew client are resolved.',
         title: 'Forgotten Hero'
     };
+
+    loadValues(currentCard);
+    
     let WebFontConfig = {
         active: function() {
             preloadImages();
@@ -120,6 +123,18 @@ window.onload = function(){
 
         }, "image/png");
     };
+
+    function loadValues(card) {
+        selectCardClass.value = card.frame;
+        selectCardRarity.value = card.rarity;
+        inpCardTitle.value = card.title;
+        inpCardType.value =  card.type;
+        inpCardMagicka.value =  card.magicka;
+        inpCardPower.value =  card.power;
+        inpCardHealth.value =  card.health;
+        inpSupportShout.value = card.supportShout;
+        txtCardText.value = card.text;
+    }
 
     function checkRarityForDuoTrio() {
         currentCard.rarity = selectCardRarity.value;
