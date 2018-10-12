@@ -31,7 +31,7 @@ window.onload = function(){
     };
 
     loadValues(currentCard);
-    
+
     let WebFontConfig = {
         active: function() {
             preloadImages();
