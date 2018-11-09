@@ -1,6 +1,5 @@
 
-
-window.onload = function(){
+window.onload = function() {
     let canvas = document.getElementById('MainCanvas');
     let selectCardClass = document.getElementById('CardClass');
     let selectCardRarity = document.getElementById('CardRarity');
@@ -26,14 +25,14 @@ window.onload = function(){
         power: '3',
         rarity: 'epic',
         type: 'Player',
-        text: '[Summon]: Keep hope until \nall issues with the \nnew client are resolved.',
+        text: '[Summon]: Keep hope until\nall issues with the\nnew client are resolved.\n(a) (e) (i) (n) (s) (w)',
         title: 'Forgotten Hero'
     };
 
     loadValues(currentCard);
 
     let WebFontConfig = {
-        active: function() {
+        active: function () {
             preloadImages();
         },
         google: {
@@ -42,62 +41,62 @@ window.onload = function(){
     };
     WebFont.load(WebFontConfig);
 
-    selectCardClass.onchange = function(){
+    selectCardClass.onchange = function () {
         currentCard.frame = this.value;
         checkRarityForDuoTrio();
         drawCardImage();
     };
 
-    selectCardRarity.onchange = function(){
+    selectCardRarity.onchange = function () {
         checkRarityForDuoTrio();
         drawCardImage();
     };
 
-    inpCardTitle.onkeyup = function(){
+    inpCardTitle.onkeyup = function () {
         currentCard.title = this.value;
         drawCardImage();
     };
 
-    inpCardMagicka.onkeyup = function(){
+    inpCardMagicka.onkeyup = function () {
         currentCard.magicka = this.value;
         drawCardImage();
     };
 
-    inpCardPower.onkeyup = function(){
+    inpCardPower.onkeyup = function () {
         currentCard.power = this.value;
         drawCardImage();
     };
 
-    inpCardHealth.onkeyup = function(){
+    inpCardHealth.onkeyup = function () {
         currentCard.health = this.value;
         drawCardImage();
     };
 
-    inpSupportShout.onkeyup = function(){
+    inpSupportShout.onkeyup = function () {
         currentCard.supportShout = this.value;
         drawCardImage();
     };
 
-    txtCardText.onkeyup = function(){
+    txtCardText.onkeyup = function () {
         currentCard.text = this.value;
         drawCardImage();
     };
 
-    inpCardType.onkeyup = function(){
+    inpCardType.onkeyup = function () {
         currentCard.type = this.value;
         drawCardImage();
     };
 
-    inpCardArt.onchange = function(){
-        if(inpCardArt.files.length !== 1 ) return;
+    inpCardArt.onchange = function () {
+        if (inpCardArt.files.length !== 1) return;
         let file = inpCardArt.files[0];
         let img = new Image();
-        if(file.type.match('image.*')) {
+        if (file.type.match('image.*')) {
             let reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload = function(evt){
-                if( evt.target.readyState === FileReader.DONE) {
-                    img.src =  evt.target.result;
+            reader.onload = function (evt) {
+                if (evt.target.readyState === FileReader.DONE) {
+                    img.src = evt.target.result;
                     img.onload = function () {
 
                         currentCard.art = cropImage(img, 320, 420);
@@ -107,10 +106,10 @@ window.onload = function(){
         }
     };
 
-    btnSaveImage.onclick = function(e){
-        canvas.toBlob(function(blob) {
+    btnSaveImage.onclick = function (e) {
+        canvas.toBlob(function (blob) {
             let downloadName = "image.png";
-            if(currentCard.title){
+            if (currentCard.title) {
                 downloadName = currentCard.title.replace(/[^a-zA-Z0-9]/g, '-') + '.png';
             }
 
@@ -128,20 +127,20 @@ window.onload = function(){
         selectCardClass.value = card.frame;
         selectCardRarity.value = card.rarity;
         inpCardTitle.value = card.title;
-        inpCardType.value =  card.type;
-        inpCardMagicka.value =  card.magicka;
-        inpCardPower.value =  card.power;
-        inpCardHealth.value =  card.health;
+        inpCardType.value = card.type;
+        inpCardMagicka.value = card.magicka;
+        inpCardPower.value = card.power;
+        inpCardHealth.value = card.health;
         inpSupportShout.value = card.supportShout;
         txtCardText.value = card.text;
     }
 
     function checkRarityForDuoTrio() {
         currentCard.rarity = selectCardRarity.value;
-        if(currentCard.rarity.indexOf('legendary') >= 0){
-            if(currentCard.frame.indexOf('duo_') >= 0)
+        if (currentCard.rarity.indexOf('legendary') >= 0) {
+            if (currentCard.frame.indexOf('duo_') >= 0)
                 currentCard.rarity += '_duo';
-            else if(currentCard.frame.indexOf('trio_') >= 0)
+            else if (currentCard.frame.indexOf('trio_') >= 0)
                 currentCard.rarity += '_trio';
         }
     }
@@ -157,27 +156,27 @@ window.onload = function(){
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if(layerArt) ctx.drawImage(layerArt, 60, 120, 320, 420);
-        if(layerFrame) ctx.drawImage(layerFrame, 0, 0);
-        if(layerRarity) ctx.drawImage(layerRarity, 0, 0);
-        if(layerSupport) ctx.drawImage(layerSupport, 0, 0);
-        else if(layerPH) ctx.drawImage(layerPH, 0, 0);
+        if (layerArt) ctx.drawImage(layerArt, 60, 120, 320, 420);
+        if (layerFrame) ctx.drawImage(layerFrame, 0, 0);
+        if (layerRarity) ctx.drawImage(layerRarity, 0, 0);
+        if (layerSupport) ctx.drawImage(layerSupport, 0, 0);
+        else if (layerPH) ctx.drawImage(layerPH, 0, 0);
 
         //Magicka
-        ctx.textAlign="center";
+        ctx.textAlign = "center";
         ctx.font = 'bold 54px Ubuntu';
         ctx.fillStyle = '#000000';
         ctx.strokeStyle = '#000000';
         ctx.strokeText(currentCard.magicka, 65, 110);
         ctx.fillText(currentCard.magicka, 65, 110);
 
-        if(currentCard.supportShout) {
+        if (currentCard.supportShout) {
             //Support
             ctx.textAlign = "center";
             ctx.font = '700 16px Merriweather';
             ctx.fillStyle = '#111';
             ctx.fillText(currentCard.supportShout, 220, 488);
-        }else if(currentCard.power && currentCard.health){
+        } else if (currentCard.power && currentCard.health) {
             //Power & Health
             ctx.textAlign = "center";
             ctx.font = 'bold 52px Ubuntu';
@@ -187,7 +186,7 @@ window.onload = function(){
         }
 
         //Type
-        ctx.textAlign="center";
+        ctx.textAlign = "center";
         ctx.font = '300 14px Merriweather';
         ctx.fillStyle = '#E0DDb9';
         ctx.fillText(currentCard.type, 220, 130);
@@ -195,8 +194,8 @@ window.onload = function(){
         //Title
         let titleFontSize = currentCard.title.length >= 28 ? 14
             : currentCard.title.length >= 20 ? 18 : 24;
-        ctx.textAlign="center";
-        ctx.font = 'bold '+titleFontSize+'px Merriweather';
+        ctx.textAlign = "center";
+        ctx.font = 'bold ' + titleFontSize + 'px Merriweather';
         ctx.fillStyle = '#FDF6DF';
         ctx.fillText(currentCard.title, 230, 105);
 
@@ -204,15 +203,15 @@ window.onload = function(){
         drawCardText(ctx);
     }
 
-    function getImageForLayer(layer){
+    function getImageForLayer(layer) {
         let src = '';
-        switch(layer){
+        switch (layer) {
             case 'art':
-                if(currentCard.art) return currentCard.art;
+                if (currentCard.art) return currentCard.art;
                 src = 'art_default.png';
                 break;
             case 'frame':
-                src = 'frame_' + currentCard.frame + '.png' ;
+                src = 'frame_' + currentCard.frame + '.png';
                 break;
             case 'rarity':
                 src = 'rarity_' + currentCard.rarity + '.png';
@@ -221,18 +220,24 @@ window.onload = function(){
                 src = currentCard.supportShout ? 'support_bg.png' : '';
                 break;
             case 'ph':
-                if(currentCard.power && currentCard.health)
+                if (currentCard.power && currentCard.health)
                     src = 'power_health_bg.png';
                 break;
         }
 
-        if(src === '') return null;
+        if (src === '') return null;
         return images['images/' + src];
     }
 
     function preloadImages() {
         let arrImageNames = [
             'art_default.png',
+            'attribute_agility.png',
+            'attribute_endurance.png',
+            'attribute_intelligence.png',
+            'attribute_neutral.png',
+            'attribute_strength.png',
+            'attribute_willpower.png',
             'frame_duo_mage.png',
             'frame_duo_warrior.png',
             'frame_mono_strength.png',
@@ -273,7 +278,7 @@ window.onload = function(){
         ];
         let loadedImagesCount = 0;
 
-        for(let i in arrImageNames){
+        for (let i in arrImageNames) {
             let img = new Image();
             img.onload = () => {
                 loadedImagesCount++;
@@ -288,56 +293,93 @@ window.onload = function(){
         }
     }
 
-    function drawCardText(ctx) {
-        let lines = currentCard.text.split('\n');
-        let fontSize = 0;
-        switch(lines.length){
-            case 1:
-            case 2:
-            case 3:
-                fontSize = 22;
-                break;
-            case 4:
-                fontSize = 18;
-                break;
-            case 5:
-                fontSize = 14;
-                break;
-            default:
-                fontSize = 12;
-                break;
-        }
-        let lineHeight = fontSize + 4;
-        let ySpan = 30;
-        let yText = 525 - (lines.length * (fontSize / 2));
+    function generateTextParts(line) {
+        let parts = [];
 
-        let data = '<svg xmlns="http://www.w3.org/2000/svg" width="280" height="120">' +
-            '<text font-size="'+fontSize+'" font-family="Rubik, Arial, sans-serif" fill="#D3C6A9" text-anchor="middle">';
+        let regex = new RegExp(/(\[[^\]]+\])|(\([aeinsw]\))|([^()\[\]]*)/g);
+        let matches = line.match(regex);
 
-        let boldRegex = /\[([^\]]+)\]/g;
-        for(let i=0; i < lines.length; i++) {
-            let line = lines[i];
-            let bold = boldRegex.exec(line);
-            while(bold) {
-                let boldPart = line.substr(bold.index + 1, bold[1].length);
-                line = line.replace(bold[0], '<tspan font-weight="700">' + boldPart + '</tspan>');
-                bold = boldRegex.exec(line);
+        for (let i = 0; i < matches.length; i++) {
+            let text = matches[i];
+            if (!text) continue;
+
+            let currentPart = new LinePart();
+            if (text[0] === '[') {
+                currentPart.IsBold = true;
+                currentPart.Text = text.substr(1, text.length - 2);
+            } else if (text[0] === '(') {
+                currentPart.AttributeIcon = getAttributeIcon(text[1]);
+            } else {
+                currentPart.Text = text;
             }
 
-            data += '<tspan y="'+ySpan+'" x="140" >' + line + '</tspan>';
-            ySpan += lineHeight;
+            parts.push(currentPart);
         }
 
-        data += '</text>'+'</svg>';
+        return parts;
+    }
 
-        let img = new Image();
-        let svg = new Blob([data], {type: 'image/svg+xml'});
-        let url = URL.createObjectURL(svg);
-        img.onload = function () {
-            ctx.drawImage(img, 80, yText);
-            URL.revokeObjectURL(url);
-        };
-        img.src = url;
+    function calculateTextPartsLength(ctx, fontSize, lineTextParts) {
+        let totalLineWidth = 0;
+        for (let p = 0; p < lineTextParts.length; p++) {
+            let part = lineTextParts[p];
+
+            if (part.AttributeIcon) {
+                totalLineWidth += fontSize;
+                continue;
+            }
+
+            ctx.strokeStyle = '#D3C6A9';
+            ctx.font = fontSize + 'px Rubik';
+            ctx.textAlign="left";
+
+            if (part.IsBold) ctx.font = 'bold ' + ctx.font;
+            totalLineWidth += ctx.measureText(part.Text).width;
+        }
+        return totalLineWidth;
+    }
+
+    function drawTextParts(ctx, yText, fontSize, lineTextParts) {
+        let totalLineWidth = calculateTextPartsLength(ctx, fontSize, lineTextParts);
+
+        let xCurrent = canvas.width / 2 - totalLineWidth / 2;
+
+        //draw all parts of the current line from left to right
+        for (let p = 0; p < lineTextParts.length; p++) {
+            let part = lineTextParts[p];
+
+            if (part.AttributeIcon) {
+                let img = images['images/' + part.AttributeIcon];
+                let imgHeight = fontSize;
+                ctx.drawImage(img, xCurrent, yText - imgHeight + (fontSize / 5), imgHeight, imgHeight);
+                xCurrent += fontSize;
+                continue;
+            }
+
+            ctx.fillStyle = '#D3C6A9';
+            ctx.font = fontSize + 'px Rubik';
+            ctx.textAlign="left";
+
+            if (part.IsBold) ctx.font = 'bold ' + ctx.font;
+            ctx.fillText(part.Text, xCurrent, yText);
+            xCurrent += ctx.measureText(part.Text).width;
+
+        }
+    }
+
+    function drawCardText(ctx) {
+        let lines = currentCard.text.split('\n');
+        let fontSize = calculateFontSize(lines.length);
+        let yText = 555 - (lines.length * (fontSize / 2));
+        let lineHeight = fontSize + 4;
+
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i];
+            let lineTextParts = generateTextParts(line);
+
+            drawTextParts(ctx, yText, fontSize, lineTextParts);
+            yText += lineHeight;
+        }
     }
 
     function cropImage(img, width, height) {
@@ -376,12 +418,51 @@ window.onload = function(){
         if (cw > iw) cw = iw;
         if (ch > ih) ch = ih;
 
-        ctx.drawImage(img, cx, cy, cw, ch,  0, 0, width, height);
+        ctx.drawImage(img, cx, cy, cw, ch, 0, 0, width, height);
 
-        imgCropContainer.onload = function(){
+        imgCropContainer.onload = function () {
             currentCard.art = this;
             drawCardImage();
         };
-        imgCropContainer.src =   canvasCrop.toDataURL();
+        imgCropContainer.src = canvasCrop.toDataURL();
+    }
+
+    function getAttributeIcon(char) {
+        switch (char) {
+            case 'a':
+                return 'attribute_agility.png';
+            case 'e':
+                return 'attribute_endurance.png';
+            case 'i':
+                return 'attribute_intelligence.png';
+            case 'n':
+                return 'attribute_neutral.png';
+            case 's':
+                return 'attribute_strength.png';
+            case 'w':
+                return 'attribute_willpower.png';
+        }
+        return '';
+    }
+
+    function calculateFontSize(lineCount) {
+        switch (lineCount) {
+            case 1:
+            case 2:
+            case 3:
+                return 22;
+            case 4:
+                return 18;
+            case 5:
+                return 14;
+            default:
+                return 12;
+        }
+    }
+
+    function LinePart() {
+        this.IsBold = false;
+        this.AttributeIcon = null;
+        this.Text = '';
     }
 };
