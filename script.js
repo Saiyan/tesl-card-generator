@@ -10,6 +10,7 @@ window.onload = function() {
     let inpCardHealth = document.getElementById('CardHealth');
     let inpCardArt = document.getElementById('CardArt');
     let inpSupportShout = document.getElementById('SupportShout');
+    let inpArtAttribution = document.getElementById('ArtAttribution');
     let txtCardText = document.getElementById('CardText');
     let btnSaveImage = document.querySelector('.btn-save_image');
 
@@ -18,6 +19,7 @@ window.onload = function() {
         art: '',
         artX: 0,
         artY: 0,
+        artAttribution: '',
         supportShout: '',
         frame: 'mono_neutral',
         health: '4',
@@ -84,6 +86,11 @@ window.onload = function() {
 
     inpCardType.onkeyup = function () {
         currentCard.type = this.value;
+        drawCardImage();
+    };
+
+    inpArtAttribution.onkeyup = function () {
+        currentCard.artAttribution = this.value;
         drawCardImage();
     };
 
@@ -198,6 +205,15 @@ window.onload = function() {
         ctx.font = 'bold ' + titleFontSize + 'px Merriweather';
         ctx.fillStyle = '#FDF6DF';
         ctx.fillText(currentCard.title, 230, 105);
+
+        //ArtAttribution
+        ctx.textAlign = "center";
+        ctx.font = '300 12px Merriweather';
+        let wAA = ctx.measureText(currentCard.artAttribution);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.fillRect(230-wAA.width/2-8, 480-16, wAA.width+16, 24);
+        ctx.fillStyle = '#FDF6DF';
+        ctx.fillText(currentCard.artAttribution, 230, 480);
 
         //Text
         drawCardText(ctx);
