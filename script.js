@@ -207,13 +207,16 @@ window.onload = function() {
         ctx.fillText(currentCard.title, 230, 105);
 
         //ArtAttribution
-        ctx.textAlign = "center";
-        ctx.font = '300 12px Merriweather';
-        let wAA = ctx.measureText(currentCard.artAttribution);
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-        ctx.fillRect(230-wAA.width/2-8, 480-16, wAA.width+16, 24);
-        ctx.fillStyle = '#FDF6DF';
-        ctx.fillText(currentCard.artAttribution, 230, 480);
+        if(currentCard.artAttribution) {
+            ctx.textAlign = "center";
+            ctx.font = '300 12px Merriweather';
+            let ardAttrTop = currentCard.supportShout ? 460 : 480;
+            let wAA = ctx.measureText(currentCard.artAttribution);
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            ctx.fillRect(230 - wAA.width / 2 - 16, ardAttrTop - 16, wAA.width + 16, 24);
+            ctx.fillStyle = '#FDF6DF';
+            ctx.fillText(currentCard.artAttribution, 230 - 8, ardAttrTop);
+        }
 
         //Text
         drawCardText(ctx);
